@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+@using BlazorServerApp.Data
+@inject CustomAuthenticationStateProvider AuthenticationStateProvider
+<div class="main">
+    <div class="top-row px-4">
+      
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AuthenticationStateProvider.InitializeAsync();
+        }
+    }
+}

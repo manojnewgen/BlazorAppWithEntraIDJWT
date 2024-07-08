@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inherits AuthorizeView
+
+<CascadingValue Value="this">
+    @if (IsAuthorized())
+    {
+        @Authorized
+    }
+    else
+    {
+        @NotAuthorized
+    }
+</CascadingValue>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>
+    ? AuthenticationState
+    { get; set; }
+
+    [Parameter] public RenderFragment? Authorized { get; set; }
+    [Parameter] public RenderFragment? NotAuthorized { get; set; }
+    [Parameter] public string? Roles { get; set; }
+    [Parameter] public string? Policy { get; set; }
+
+    private bool IsAuthorized()
+    {
+        if (AuthenticationState == null)
+            return false;
+
+        var authState = AuthenticationState.Result;
+        var user = authState.User;
+
+        if (!user.Identity?.IsAuthenticated ?? false)
+            return false;
+
+        if (!string.IsNullOrEmpty(Roles))
+        {
+            var roleList = Roles.Split(',').Select(r => r.Trim());
+            return roleList.Any(r => user.IsInRole(r));
+        }
+
+        if (!string.IsNullOrEmpty(Policy))
+        {
+            // Implement policy-based authorization logic here
+            // For simplicity, we'll just check if the user has a claim with the policy name
+            return user.HasClaim(c => c.Type == Policy);
+        }
+
+        return true;
+    }
+}
