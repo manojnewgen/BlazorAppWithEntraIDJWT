@@ -19,9 +19,7 @@ namespace BlazorServerApp.Services
         public HttpClient _httpClient { get; }
         public AppSettings _appSettings { get; }
 
-        public CustomAuthenticationStateProvider _customAuthenticationStateProvider { get; }
-
-        public UserService(HttpClient httpClient, IOptions<AppSettings> appSettings, CustomAuthenticationStateProvider customAuthenticationStateProvider)
+        public UserService(HttpClient httpClient, IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
 
@@ -29,7 +27,6 @@ namespace BlazorServerApp.Services
             httpClient.DefaultRequestHeaders.Add("User-Agent", "BlazorServer");
 
             _httpClient = httpClient;
-            _customAuthenticationStateProvider = customAuthenticationStateProvider;
         }
 
         public async Task<User> LoginAsync(User user)

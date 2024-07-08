@@ -63,8 +63,6 @@ namespace BlazorServerApp.Data
             var identity = GetClaimsIdentity(user);
             var claimsPrincipal = new ClaimsPrincipal(identity);
 
-            //await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(returnedUser);
-
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
