@@ -77,10 +77,10 @@ namespace BlazorServerApp.Services
             request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
                 { "grant_type", "password" },
-                { "client_id", "3752392f-11da-42cc-8fd2-d1696dc642bd" },
-                { "client_secret", "04d706b5-2fbf-40d1-9609-4f3f35621577" },
-                { "username", "sandhya@mannu9058gmail.onmicrosoft.com" },
-                { "password", "Mitom@12" }
+                { "client_id", "" },
+                { "client_secret", "" },
+                { "username", "" },
+                { "password", "" }
             });
 
             var response = await _httpClient.SendAsync(request);
