@@ -21,12 +21,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary.csproj" />
-  </ItemGroup>
-
 </Project>
